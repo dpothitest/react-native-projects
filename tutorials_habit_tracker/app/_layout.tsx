@@ -3,7 +3,7 @@ import '../global.css';
 import { Stack } from 'expo-router';
 
 export default function Layout() {
-  const isAuth = true;
+  const isAuth = false;
   return (
     <Stack>
       {/* hide headers */}
