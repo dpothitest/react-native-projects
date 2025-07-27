@@ -22,7 +22,7 @@ npm run reset-project
 npx expo start
 ```
 
-## Add native wind
+## Use native wind to create project
 
 ```
 npx create-expo-stack tutorial_habit_tracker --exporouter --nativewind --blank
