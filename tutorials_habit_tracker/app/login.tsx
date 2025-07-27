@@ -1,10 +1,25 @@
 import { View, KeyboardAvoidingView, Platform } from 'react-native';
-import { Button, Text, TextInput } from 'react-native-paper';
+import { Button, Text, TextInput, useTheme } from 'react-native-paper';
 import React, { useState } from 'react';
 
 export default function Login() {
-  const [isSignUp, setIsSignedUp] = useState(false);
-  const handleSwitchMode = () => {
+  const [isSignUp, setIsSignedUp] = useState<boolean>(false);
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [error, setError] = useState<string | null>('');
+  const theme = useTheme();
+  const handleAuth = () => {
+    console.log('Auth handle triggered');
+    if (!email || !password) {
+      setError('Please enter email and password');
+      return;
+    }
+    if (password.length < 6) {
+      setError('Password length does not satisfy the min requirements');
+    }
+    setError(null);
+  };
+  const handleSwitchMode = async () => {
     setIsSignedUp((prev) => !isSignUp);
   };
   const styles = {
@@ -29,6 +44,7 @@ export default function Login() {
           placeholder="example@gmail.com"
           mode="outlined"
           className={styles.textInput}
+          onChangeText={setEmail}
         />
         <TextInput
           label={'password'}
@@ -36,10 +52,16 @@ export default function Login() {
           keyboardType="email-address"
           mode="outlined"
           className={styles.textInput}
+          onChangeText={setPassword}
         />
-        <Button mode="contained" className={styles.button} style={{ marginTop: 10 }}>
+        <Button
+          mode="contained"
+          className={styles.button}
+          style={{ marginTop: 10 }}
+          onPress={handleAuth}>
           {isSignUp ? 'Sign Up' : 'Login'}
         </Button>
+        {error ? <Text style={{ color: theme.colors.error }}>{error}</Text> : ''}
         <Button mode="text" onPress={handleSwitchMode}>
           {isSignUp ? 'Aleady have an account? Sign In' : 'Dont have an account? Sign up'}
         </Button>
