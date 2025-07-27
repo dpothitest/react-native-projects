@@ -25,6 +25,9 @@ npx expo start
 ## Add native wind
 
 ```
-npx create-expo-app@latest ./ --nativewind
 npx create-expo-stack tutorial_habit_tracker --exporouter --nativewind --blank
+
+# delete additional files that are not needed, if you use this template there is no way to run reset-project,
+# delete components and other unneccasary files
+# delete the .git folder
 ```
